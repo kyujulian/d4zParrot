@@ -1,0 +1,9 @@
+---
+- name: "Parrot install"
+  hosts: localhost
+  connection: local
+  tasks:
+  roles:
+    - role:  "roles/terminal"
+    - role:  "roles/configure-tmux"
+    - role:  "roles/i3"

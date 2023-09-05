@@ -1,0 +1,32 @@
+---
+- name: "Install terminator"
+  apt: 
+    name: terminator
+    state: present
+  become: true
+  become_method: sudo
+- name: "Copy terminator config "
+  copy: 
+    src: "{{playbook_dir}}/files/terminator_config"
+    dest: "{{ ansible_env.HOME }}/.config/terminator/config
+
+
+- name: "Install zsh"
+  apt: 
+    name: zsh
+    state: present
+  become: true
+  become_method: sudo
+
+- name: "Setting Oh-My-Zsh"
+  ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  ignore_errors: true
+
+- name: "make zsh the default shell"
+  ansible.builtin.shell: echo "zsh" | tee "{{ ansible_env.HOME }}/.bashrc" 
+
+- name: "Copying .zshrc file"
+  copy: 
+    src: "{{playbook_dir}}/files/.zshrc"
+    dest: "{{ ansible_env.HOME}}"
+

@@ -1,0 +1,12 @@
+---
+- name: "Install i3"
+  apt:
+    name: i3
+    state: present
+  become: true
+  become_method: sudo
+
+- name: "Copying i3 config"
+  copy:
+    src: "{{ playbook_dir }}/files/i3_config"
+    dest: "{{ ansible_env.HOME}}/.config/i3/config"

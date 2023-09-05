@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if apt list --installed | grep -q "ansible"; then
+    echo "Ansible is installed."
+else
+    echo "Installing ansible"
+    sudo apt install ansible -y
+fi
+
+ansible-playbook main.yml
